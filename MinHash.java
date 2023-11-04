@@ -10,9 +10,14 @@ public class MinHash {
 
     int numPerms;
 
+    String[] allDocs;
+
+    int[][] permutations;
+
     public MinHash(String folder, int numPermutations){
         this.folder = folder;
         numPerms = numPermutations;
+        this.allDocs = allDocs();
     }
 
     public String[] allDocs() {
@@ -39,4 +44,10 @@ public class MinHash {
     public int[][] minHashMatrix() {
 
     }
+
+    public void generatePerms(){
+
+    }
+
+
 }
