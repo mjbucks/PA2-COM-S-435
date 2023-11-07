@@ -9,8 +9,8 @@ public class DocumentPreprocessor {
 
     File file;
 
-    public DocumentPreprocessor(File file) {
-        this.file = file;
+    public DocumentPreprocessor(String folder, String fileName) {
+        this.file = new File(folder + "\\" + fileName);
     }
 
     public ArrayList<String> preProcess() throws FileNotFoundException {

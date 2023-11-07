@@ -67,13 +67,12 @@ public class MinHash {
 
 
         for (int pi = 0; pi < numPermutations; pi++) {
-            System.out.println("Permutation " + pi + ": ");
             rand = new Random(pi);
 
             for (int d = 0; d < allDocs.length; d++) {
 
-                File currFile = new File(folder + "\\" + allDocs[d]);
-                documentPreprocessor = new DocumentPreprocessor(currFile);
+                //File currFile = new File(folder + "\\" + allDocs[d]);
+                documentPreprocessor = new DocumentPreprocessor(folder, allDocs[d]);
                 ArrayList<String> currTerms = documentPreprocessor.preProcess();
 
                 hashTerms = new int[currTerms.size()];
@@ -96,8 +95,8 @@ public class MinHash {
         int[][] termDocMatrix = new int[allTermsInDocset.size()][allDocs.length];
 
         for (int i = 0; i < allDocs.length; i++) {
-            File currFile = new File(folder + "\\" + allDocs[i]);
-            documentPreprocessor = new DocumentPreprocessor(currFile);
+            //File currFile = new File(folder + "\\" + allDocs[i]);
+            documentPreprocessor = new DocumentPreprocessor(folder, allDocs[i]);
             ArrayList<String> currTerms = documentPreprocessor.preProcess();
             for (int t = 0; t < allTermsInDocset.size(); t++){
                 if (currTerms.contains(allTermsInDocset.get(t))){
@@ -148,8 +147,8 @@ public class MinHash {
         ArrayList<String> termsList = new ArrayList<String>();
         DocumentPreprocessor documentPreprocessor;
         for(int i = 0; i < allDocs.length; i++){
-            File currFile = new File(folder + "\\" + allDocs[i]);
-            documentPreprocessor = new DocumentPreprocessor(currFile);
+            //File currFile = new File(folder + "\\" + allDocs[i]);
+            documentPreprocessor = new DocumentPreprocessor(folder, allDocs[i]);
             ArrayList<String> currTerms = documentPreprocessor.preProcess();
             for(int j = 0; j < currTerms.size(); j++){
                 if (!termsList.contains(currTerms.get(j))){
