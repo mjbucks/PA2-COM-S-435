@@ -13,8 +13,8 @@ public class MinHashAccuracy {
         for (int i = 0; i < allDocsSize; i++) {
             for (int j = i + 1; j < allDocsSize; j++) {
 
-                file1 = minHashSimilarities.minHash.allDocs.get(i);
-                file2 = minHashSimilarities.minHash.allDocs.get(j);
+                file1 = minHashSimilarities.minHash.allDocs[i];
+                file2 = minHashSimilarities.minHash.allDocs[j];
 
                 diff = Math.abs(minHashSimilarities.exactJaccard(file1, file2) - minHashSimilarities.approximateJaccard(file1, file2));
                 if (diff > errorParam ) {
