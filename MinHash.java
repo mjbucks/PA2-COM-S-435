@@ -15,7 +15,7 @@ public class MinHash {
 
     int numPermutations;
 
-    List<String> allDocs;
+    String[] allDocs;
 
     int[][] minHashMatrix;
 
@@ -28,22 +28,23 @@ public class MinHash {
         this.folder = folder;
         this.numPermutations = numPermutations;
         this.allDocs = allDocs();
-        allDocsSize = allDocs.size();
+        allDocsSize = allDocs.length;
         allTermsInDocset = getAllTerms();
 
 //        minHashMatrix = minHashMatrix();
 //        termDocumentMatrix = termDocumentMatrix();
     }
 
-    public List<String> allDocs() {
+    public String[] allDocs() {
         try {
             Path folderPath = Paths.get(folder);
-            List<String> allDocs = new ArrayList<String>();
+            long count = Files.list(folderPath).count();
+            String[] allDocs = new String[(int) count];
             int i = 0;
             try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(folderPath)) {
                 for (Path path : directoryStream) {
                     if (Files.isRegularFile(path)) {
-                        allDocs.add(String.valueOf(path.getFileName()));
+                        allDocs[i] = String.valueOf(path.getFileName());
                         i++;
                     }
                 }
@@ -61,7 +62,7 @@ public class MinHash {
         Random rand;
         int[][] minhash = new int[numPermutations][allDocsSize];
         int a, b, p, x;
-        p = findPrimeLargerThanM(allDocs().size());
+        p = findPrimeLargerThanM(allDocsSize);
         int[] hashTerms;
 
 
@@ -73,7 +74,7 @@ public class MinHash {
 
             for (int d = 0; d < allDocsSize; d++) {
 
-                documentPreprocessor = new DocumentPreprocessor(folder, allDocs.get(d));
+                documentPreprocessor = new DocumentPreprocessor(folder, allDocs[d]);
                 ArrayList<String> currTerms = documentPreprocessor.preProcess();
 
                 hashTerms = new int[currTerms.size()];
@@ -99,7 +100,7 @@ public class MinHash {
         int[][] termDocMatrix = new int[allTermsInDocset.size()][allDocsSize];
 
         for (int i = 0; i < allDocsSize; i++) {
-            documentPreprocessor = new DocumentPreprocessor(folder, allDocs.get(i));
+            documentPreprocessor = new DocumentPreprocessor(folder, allDocs[i]);
             ArrayList<String> currTerms = documentPreprocessor.preProcess();
             for (int t = 0; t < allTermsInDocset.size(); t++){
                 if (currTerms.contains(allTermsInDocset.get(t))){
@@ -151,7 +152,7 @@ public class MinHash {
         DocumentPreprocessor documentPreprocessor;
         for(int i = 0; i < allDocsSize; i++){
             //File currFile = new File(folder + "\\" + allDocs[i]);
-            documentPreprocessor = new DocumentPreprocessor(folder, allDocs.get(i));
+            documentPreprocessor = new DocumentPreprocessor(folder, allDocs[i]);
             ArrayList<String> currTerms = documentPreprocessor.preProcess();
             for(int j = 0; j < currTerms.size(); j++){
                 if (!termsList.contains(currTerms.get(j))){
