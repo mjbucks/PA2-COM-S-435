@@ -67,6 +67,9 @@ public class MinHash {
 
         for (int pi = 0; pi < numPermutations; pi++) {
             rand = new Random(pi);
+            a = rand.nextInt();
+            b = rand.nextInt();
+            int min, hashTerm;
 
             for (int d = 0; d < allDocsSize; d++) {
 
@@ -74,15 +77,17 @@ public class MinHash {
                 ArrayList<String> currTerms = documentPreprocessor.preProcess();
 
                 hashTerms = new int[currTerms.size()];
+                min = 2147483647; // max value of int
 
-                for (int t = 0; t < currTerms.size(); t++) {
-                    x = currTerms.get(t).hashCode();
-                    a = rand.nextInt();
-                    b = rand.nextInt();
+                for (String currTerm : currTerms) {
+                    x = currTerm.hashCode();
 
-                    hashTerms[t] = Math.abs((a * x + b) % p);
+                    hashTerm = Math.abs((a * x + b) % p);
+                    if (hashTerm < min) {
+                        min = hashTerm;
+                    }
                 }
-                minhash[pi][d] = getMin(hashTerms);
+                minhash[pi][d] = min;
             }
         }
         return minhash;
