@@ -5,6 +5,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Main {
@@ -18,15 +19,15 @@ public class Main {
 //        System.out.println();
 //
 //
-//        MinHash min = new MinHash("C:\\Users\\hedgr_v6euno5\\OneDrive\\ISU Fall23\\COM S 435\\PA2\\space", 10);
-//        int[][] minHashMatrix = min.minHashMatrix();
-//        String[] allDocs = min.allDocs();
-//        for(int i = 0; i < minHashMatrix.length; i ++ ) {
-//            for(int j = 0; j < minHashMatrix[i].length; j ++ ) {
-//                System.out.print(minHashMatrix[i][j] + " ");
-//            }
-//            System.out.println();
-//        }
+        MinHash min = new MinHash("C:\\Users\\hedgr_v6euno5\\OneDrive\\ISU Fall23\\COM S 435\\PA2\\space", 10);
+        int[][] minHashMatrix = min.minHashMatrix();
+        List<String> allDocs = min.allDocs();
+        for(int i = 0; i < minHashMatrix.length; i ++ ) {
+            for(int j = 0; j < minHashMatrix[i].length; j ++ ) {
+                System.out.print(minHashMatrix[i][j] + " ");
+            }
+            System.out.println();
+        }
 //        int[][] termMatrix = min.termDocumentMatrix();
 //        for(int i = 0; i < termMatrix.length; i ++ ) {
 //            for(int j = 0; j < termMatrix[i].length; j ++ ) {
@@ -35,7 +36,8 @@ public class Main {
 //            System.out.println();
 //        }
 
-//        MinHashSimilarities minHashSimilarities = new MinHashSimilarities("C:\\Users\\hedgr_v6euno5\\OneDrive\\ISU Fall23\\COM S 435\\PA2\\space", 10);
-//        System.out.println(minHashSimilarities.exactJaccard("space-4.txt", "space-3.txt"));
+        MinHashSimilarities minHashSimilarities = new MinHashSimilarities("C:\\Users\\hedgr_v6euno5\\OneDrive\\ISU Fall23\\COM S 435\\PA2\\space", 10);
+        System.out.println(minHashSimilarities.approximateJaccard("space-4.txt", "space-3.txt"));
+//        System.out.println(Arrays.toString(minHashSimilarities.minHashSig("space-10.txt")));
     }
 }

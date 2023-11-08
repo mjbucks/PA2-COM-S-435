@@ -1,5 +1,8 @@
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 public class MinHashSimilarities {
 
@@ -16,18 +19,49 @@ public class MinHashSimilarities {
     }
 
     public double exactJaccard(String file1, String file2) throws FileNotFoundException {
-        documentPreprocessor = new DocumentPreprocessor(folder, file1);
-        ArrayList<String> terms1 = documentPreprocessor.preProcess();
+        double intersectCardinality = 0;
+        double unionCardinality = 0;
 
-        documentPreprocessor = new DocumentPreprocessor(folder, file2);
-        ArrayList<String> terms2 = documentPreprocessor.preProcess();
+        int file1Index = minHash.allDocs.indexOf(file1);
+        int file2Index = minHash.allDocs.indexOf(file2);
 
-        JaccardSimilarity<String> jaccSim = new JaccardSimilarity<String>();
 
-        return jaccSim.MultiSetJaccardSimilarity(terms1, terms2);
+        for (int t = 0; t < termDocMatrix.length; t++) {
+            if (termDocMatrix[t][file1Index] >= 1 && termDocMatrix[t][file2Index] >= 1) {
+                intersectCardinality++;
+                unionCardinality++;
+            }
+            else if (termDocMatrix[t][file1Index] >= 1 || termDocMatrix[t][file2Index] >= 1) {
+                unionCardinality++;
+            }
+        }
+        return intersectCardinality/unionCardinality;
     }
 
+    public double approximateJaccard(String file1, String file2) {
+        double intersectCardinality = 0;
+        double unionCardinality = minHash.numPermutations;
 
+        int file1Index = minHash.allDocs.indexOf(file1);
+        int file2Index = minHash.allDocs.indexOf(file2);
 
+        for (int[] hashMatrix : minHashMatrix) {
+            if (hashMatrix[file1Index] == hashMatrix[file2Index]) {
+                intersectCardinality++;
+            }
+        }
+        return intersectCardinality/unionCardinality;
+    }
+
+    public int[] minHashSig(String fileName) {
+        int[] signature = new int[minHash.numPermutations];
+        int fileIndex = minHash.allDocs.indexOf(fileName);
+
+        for (int p = 0; p < minHash.numPermutations; p++){
+            signature[p] = minHashMatrix[p][fileIndex];
+        }
+
+        return signature;
+    }
 
 }
