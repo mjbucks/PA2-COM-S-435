@@ -1,39 +1,36 @@
 import java.util.*;
 
-public class JaccardSimilarity<T> {
+public class JaccardSimilarity {
 
-    public JaccardSimilarity() {
-    }
-
-    public Set<T> union (ArrayList<T> A, ArrayList<T> B) {
-        Set<T> U = new HashSet<T>();
+    public static Set<String> union(ArrayList<String> A, ArrayList<String> B) {
+        Set<String> U = new HashSet<String>();
         U.addAll(A);
         U.addAll(B);
         return U;
     }
 
-    public int termFrequency (ArrayList<T> E, T x) {
+    public static int termFrequency(ArrayList<String> E, String x) {
         return Collections.frequency(E, x);
     }
 
-    public double intersectCardinality (ArrayList<T> A, ArrayList<T> B, Set<T> U) {
+    public static double intersectCardinality(ArrayList<String> A, ArrayList<String> B, Set<String> U) {
         int sum = 0;
-        for (T x : U) {
+        for (String x : U) {
             sum = sum + Math.min(termFrequency(A, x), termFrequency(B, x));
         }
         return sum;
     }
 
-    private double unionCardinality (ArrayList<T> A, ArrayList<T> B, Set<T> U) {
+    private static double unionCardinality (ArrayList<String> A, ArrayList<String> B, Set<String> U) {
         int sum = 0;
-        for (T x : U) {
+        for (String x : U) {
             sum = sum + Math.max(termFrequency(A, x), termFrequency(B, x));
         }
         return sum;
     }
 
-    public double MultiSetJaccardSimilarity (ArrayList<T> A, ArrayList<T> B) {
-        Set<T> U = union(A, B);
+    public static double MultiSetJaccardSimilarity(ArrayList<String> A, ArrayList<String> B) {
+        Set<String> U = union(A, B);
         return intersectCardinality(A, B, U) / unionCardinality(A, B, U);
     }
 
