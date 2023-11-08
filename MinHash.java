@@ -7,10 +7,7 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class MinHash {
 
@@ -18,35 +15,37 @@ public class MinHash {
 
     int numPermutations;
 
-    String[] allDocs;
+    List<String> allDocs;
 
     int[][] minHashMatrix;
 
     int[][] termDocumentMatrix;
 
     ArrayList<String> allTermsInDocset;
+    int allDocsSize;
 
     public MinHash(String folder, int numPermutations) throws FileNotFoundException {
         this.folder = folder;
         this.numPermutations = numPermutations;
         this.allDocs = allDocs();
+        allDocsSize = allDocs.size();
         allTermsInDocset = getAllTerms();
+
 //        minHashMatrix = minHashMatrix();
 //        termDocumentMatrix = termDocumentMatrix();
     }
 
-    public String[] allDocs() {
+    public List<String> allDocs() {
         try {
             Path folderPath = Paths.get(folder);
-            long count = Files.list(folderPath).count();
-            String[] allDocs = new String[(int) count];
+            List<String> allDocs = new ArrayList<String>();
             int i = 0;
-            DirectoryStream<Path> directoryStream = Files.newDirectoryStream(folderPath);
-
-            for (Path path : directoryStream) {
-                if (Files.isRegularFile(path)) {
-                    allDocs[i] = String.valueOf(path.getFileName());
-                    i++;
+            try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(folderPath)) {
+                for (Path path : directoryStream) {
+                    if (Files.isRegularFile(path)) {
+                        allDocs.add(String.valueOf(path.getFileName()));
+                        i++;
+                    }
                 }
             }
             return allDocs;
@@ -60,20 +59,18 @@ public class MinHash {
 
         DocumentPreprocessor documentPreprocessor;
         Random rand;
-        int[][] minhash = new int[numPermutations][allDocs.length];
+        int[][] minhash = new int[numPermutations][allDocsSize];
         int a, b, p, x;
-        p = findPrimeLargerThanM(allDocs().length);
+        p = findPrimeLargerThanM(allDocs().size());
         int[] hashTerms;
 
 
         for (int pi = 0; pi < numPermutations; pi++) {
-            System.out.println("Permutation " + pi + ": ");
             rand = new Random(pi);
 
-            for (int d = 0; d < allDocs.length; d++) {
+            for (int d = 0; d < allDocsSize; d++) {
 
-                File currFile = new File(folder + "\\" + allDocs[d]);
-                documentPreprocessor = new DocumentPreprocessor(currFile);
+                documentPreprocessor = new DocumentPreprocessor(folder, allDocs.get(d));
                 ArrayList<String> currTerms = documentPreprocessor.preProcess();
 
                 hashTerms = new int[currTerms.size()];
@@ -93,11 +90,10 @@ public class MinHash {
 
     public int[][] termDocumentMatrix() throws FileNotFoundException {
         DocumentPreprocessor documentPreprocessor;
-        int[][] termDocMatrix = new int[allTermsInDocset.size()][allDocs.length];
+        int[][] termDocMatrix = new int[allTermsInDocset.size()][allDocsSize];
 
-        for (int i = 0; i < allDocs.length; i++) {
-            File currFile = new File(folder + "\\" + allDocs[i]);
-            documentPreprocessor = new DocumentPreprocessor(currFile);
+        for (int i = 0; i < allDocsSize; i++) {
+            documentPreprocessor = new DocumentPreprocessor(folder, allDocs.get(i));
             ArrayList<String> currTerms = documentPreprocessor.preProcess();
             for (int t = 0; t < allTermsInDocset.size(); t++){
                 if (currTerms.contains(allTermsInDocset.get(t))){
@@ -147,9 +143,9 @@ public class MinHash {
     public ArrayList<String> getAllTerms() throws FileNotFoundException {
         ArrayList<String> termsList = new ArrayList<String>();
         DocumentPreprocessor documentPreprocessor;
-        for(int i = 0; i < allDocs.length; i++){
-            File currFile = new File(folder + "\\" + allDocs[i]);
-            documentPreprocessor = new DocumentPreprocessor(currFile);
+        for(int i = 0; i < allDocsSize; i++){
+            //File currFile = new File(folder + "\\" + allDocs[i]);
+            documentPreprocessor = new DocumentPreprocessor(folder, allDocs.get(i));
             ArrayList<String> currTerms = documentPreprocessor.preProcess();
             for(int j = 0; j < currTerms.size(); j++){
                 if (!termsList.contains(currTerms.get(j))){
