@@ -88,6 +88,7 @@ public class MinHash {
         return minhash;
     }
 
+    // TODO Professor mentioned counting how many times a term appears rather than doing 0 or 1 if appears
     public int[][] termDocumentMatrix() throws FileNotFoundException {
         DocumentPreprocessor documentPreprocessor;
         int[][] termDocMatrix = new int[allTermsInDocset.size()][allDocsSize];
