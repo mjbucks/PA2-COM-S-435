@@ -47,8 +47,8 @@ public class Main {
 //        System.out.println(Arrays.toString(minHashSimilarities.minHashSig("space-10.txt")));
 //    System.out.println(MinHashAccuracy.accuracy(folder, 10, .5));
 
-        LSH lsh = new LSH(minHashMatrix, min.allDocs, 5);
-        System.out.println(lsh.retrieveSim("space-10.txt"));
+//        LSH lsh = new LSH(minHashMatrix, min.allDocs, 5);
+//        System.out.println(lsh.retrieveSim("space-10.txt"));
 
     }
 }
