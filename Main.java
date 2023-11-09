@@ -25,7 +25,7 @@ public class Main {
 //        System.out.println();
 //
 //
-        MinHash min = new MinHash(folder, 20);
+        MinHash min = new MinHash(folder, 800);
         int[][] minHashMatrix = min.minHashMatrix();
         String[] allDocs = min.allDocs();
         for(int i = 0; i < minHashMatrix.length; i ++ ) {

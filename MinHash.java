@@ -72,6 +72,7 @@ public class MinHash {
             b = rand.nextInt();
             int min, hashTerm;
 
+            System.out.println("Permutataion: " + pi);
             for (int d = 0; d < allDocsSize; d++) {
 
                 documentPreprocessor = new DocumentPreprocessor(folder, allDocs[d]);
