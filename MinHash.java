@@ -24,12 +24,15 @@ public class MinHash {
     ArrayList<String> allTermsInDocset;
     int allDocsSize;
 
+    int[][] termByPerm;
+
     public MinHash(String folder, int numPermutations) throws FileNotFoundException {
         this.folder = folder;
         this.numPermutations = numPermutations;
         this.allDocs = allDocs();
         allDocsSize = allDocs.length;
         allTermsInDocset = getAllTerms();
+        termByPerm = getTermByPermMatrix();
 
 //        minHashMatrix = minHashMatrix();
 //        termDocumentMatrix = termDocumentMatrix();
@@ -59,33 +62,23 @@ public class MinHash {
     public int[][] minHashMatrix() throws FileNotFoundException {
 
         DocumentPreprocessor documentPreprocessor;
-        Random rand;
         int[][] minhash = new int[numPermutations][allDocsSize];
-        int a, b, p, x;
-        p = findPrimeLargerThanM(allDocsSize);
-        int[] hashTerms;
-
+        int index;
 
         for (int pi = 0; pi < numPermutations; pi++) {
-            rand = new Random(pi);
-            a = rand.nextInt();
-            b = rand.nextInt();
-            int min, hashTerm;
+            int min;
 
             for (int d = 0; d < allDocsSize; d++) {
 
                 documentPreprocessor = new DocumentPreprocessor(folder, allDocs[d]);
                 ArrayList<String> currTerms = documentPreprocessor.preProcess();
 
-                hashTerms = new int[currTerms.size()];
                 min = 2147483647; // max value of int
 
-                for (String currTerm : currTerms) {
-                    x = currTerm.hashCode();
-
-                    hashTerm = Math.abs((a * x + b) % p);
-                    if (hashTerm < min) {
-                        min = hashTerm;
+                for (int t = 0; t < currTerms.size(); t++) {
+                    index = allTermsInDocset.indexOf(currTerms.get(t));
+                    if (termByPerm[pi][index] < min){
+                        min = termByPerm[pi][index];
                     }
                 }
                 minhash[pi][d] = min;
@@ -133,16 +126,6 @@ public class MinHash {
         return prime.intValue();
     }
 
-    public int getMin (int[] arr) {
-        int min = arr[0];
-        for (int i = 1; i < arr.length; i++) {
-            if (arr[i] < min) {
-                min = arr[i];
-            }
-        }
-        return min;
-    }
-
     public int permutationDomain() {
         return allTermsInDocset.size();
     }
@@ -161,6 +144,27 @@ public class MinHash {
             }
         }
         return termsList;
+    }
+
+    public int[][] getTermByPermMatrix(){
+        int[][] termByPerm = new int[numPermutations][allTermsInDocset.size()];
+        Random rand;
+        int a, b, x, min, hashTerm;
+        int p = findPrimeLargerThanM(allDocsSize);
+
+        for(int i = 0; i < numPermutations; i++){
+            rand = new Random(i);
+            a = rand.nextInt();
+            b = rand.nextInt();
+            for (int j = 0; j < allTermsInDocset.size(); j++){
+                x = allTermsInDocset.get(j).hashCode();
+
+                hashTerm = Math.abs((a * x + b) % p);
+                termByPerm[i][j] = hashTerm;
+            }
+        }
+
+        return termByPerm;
     }
 
 }

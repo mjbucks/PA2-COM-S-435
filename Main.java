@@ -10,7 +10,8 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
-        String folder = "C:\\Users\\hedgr_v6euno5\\OneDrive\\ISU Fall23\\COM S 435\\PA2\\space";
+//        String folder = "C:\\Users\\hedgr_v6euno5\\OneDrive\\ISU Fall23\\COM S 435\\PA2\\space";
+        String folder = "C:\\Users\\Maxwe\\Downloads\\space\\space";
 //        DocumentPreprocessor documentPreprocessor = new DocumentPreprocessor(new File("C:\\Users\\Maxwe\\Downloads\\articles\\articles\\baseball264.txt"));
 //        DocumentPreprocessor documentPreprocessor = new DocumentPreprocessor(folder, "space-4.txt");
 //        ArrayList<String> terms = documentPreprocessor.preProcess();
