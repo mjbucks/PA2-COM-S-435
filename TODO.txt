@@ -7,3 +7,8 @@ I already implemented the quicker version of getting the min for minHashMatrix
 and MinHashAccuracy takes a while to run
 - check again and see if runtime if acceptable for larger test cases
 - do report
+
+After Office Hours TODO:
+    - use the multiset jaccard similarity idea when finding jaccard similarities (i believe just in exact)
+    - calculate the number of optimal bands based on s in the similar documents
+    - double check that LSH is working as intended
