@@ -10,8 +10,8 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
-        // String folder = "C:\\Users\\hedgr_v6euno5\\OneDrive\\ISU Fall23\\COM S 435\\PA2\\space";
-        String folder = "C:\\Users\\Maxwe\\Downloads\\space\\space";
+         String folder = "C:\\Users\\hedgr_v6euno5\\OneDrive\\ISU Fall23\\COM S 435\\PA2\\doc subset";
+//        String folder = "C:\\Users\\Maxwe\\Downloads\\space\\space";
 
 //        DocumentPreprocessor documentPreprocessor = new DocumentPreprocessor(new File("C:\\Users\\Maxwe\\Downloads\\articles\\articles\\baseball264.txt"));
 //        DocumentPreprocessor documentPreprocessor = new DocumentPreprocessor(folder, "space-4.txt");
@@ -27,7 +27,7 @@ public class Main {
 //        System.out.println();
 //
 //
-        MinHash min = new MinHash(folder, 20);
+        MinHash min = new MinHash(folder, 400);
         int[][] minHashMatrix = min.minHashMatrix();
 //        String[] allDocs = min.allDocs();
 //        for(int i = 0; i < minHashMatrix.length; i ++ ) {
@@ -44,10 +44,11 @@ public class Main {
 //            System.out.println();
 //        }
 
-//        MinHashSimilarities minHashSimilarities = new MinHashSimilarities(folder, 20);
-//        System.out.println(minHashSimilarities.approximateJaccard("space-4.txt", "space-3.txt"));
-//        System.out.println(Arrays.toString(minHashSimilarities.minHashSig("space-10.txt")));
-    System.out.println(MinHashAccuracy.accuracy(folder, 400, .04));
+        MinHashSimilarities minHashSimilarities = new MinHashSimilarities(folder, 20);
+        System.out.println(minHashSimilarities.exactJaccard("space-44.txt", "space-45.txt"));
+        System.out.println(minHashSimilarities.approximateJaccard("space-44.txt", "space-45.txt"));
+        System.out.println(Arrays.toString(minHashSimilarities.minHashSig("space-44.txt")));
+//    System.out.println(MinHashAccuracy.accuracy(folder, 400, .04));
 
 //        LSH lsh = new LSH(minHashMatrix, min.allDocs, 5);
 //        System.out.println(lsh.retrieveSim("space-10.txt"));

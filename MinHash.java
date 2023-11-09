@@ -63,8 +63,7 @@ public class MinHash {
         int[][] minhash = new int[numPermutations][allDocsSize];
         int a, b, p, x;
         p = findPrimeLargerThanM(allDocsSize);
-        int[] hashTerms;
-
+        ArrayList<String> currTerms;
 
         for (int pi = 0; pi < numPermutations; pi++) {
             rand = new Random(pi);
@@ -72,13 +71,11 @@ public class MinHash {
             b = rand.nextInt();
             int min, hashTerm;
 
-            System.out.println("Permutataion: " + pi);
             for (int d = 0; d < allDocsSize; d++) {
 
                 documentPreprocessor = new DocumentPreprocessor(folder, allDocs[d]);
-                ArrayList<String> currTerms = documentPreprocessor.preProcess();
+                currTerms = documentPreprocessor.preProcess();
 
-                hashTerms = new int[currTerms.size()];
                 min = 2147483647; // max value of int
 
                 for (String currTerm : currTerms) {
@@ -104,12 +101,7 @@ public class MinHash {
             documentPreprocessor = new DocumentPreprocessor(folder, allDocs[i]);
             ArrayList<String> currTerms = documentPreprocessor.preProcess();
             for (int t = 0; t < allTermsInDocset.size(); t++){
-                if (currTerms.contains(allTermsInDocset.get(t))){
-                    termDocMatrix[t][i] = 1;
-                }
-                else{
-                    termDocMatrix[t][i] = 0;
-                }
+                termDocMatrix[t][i] = Collections.frequency(currTerms, allTermsInDocset.get(t));;
             }
         }
         return termDocMatrix;

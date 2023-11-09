@@ -22,15 +22,23 @@ public class MinHashSimilarities {
         int file1Index = Arrays.asList(minHash.allDocs).indexOf(file1);
         int file2Index = Arrays.asList(minHash.allDocs).indexOf(file2);
 
+        int termD1;
+        int termD2;
+
 
         for (int t = 0; t < termDocMatrix.length; t++) {
-            if (termDocMatrix[t][file1Index] >= 1 && termDocMatrix[t][file2Index] >= 1) {
-                intersectCardinality++;
-                unionCardinality++;
-            }
-            else if (termDocMatrix[t][file1Index] >= 1 || termDocMatrix[t][file2Index] >= 1) {
-                unionCardinality++;
-            }
+//            if (termDocMatrix[t][file1Index] >= 1 && termDocMatrix[t][file2Index] >= 1) {
+//                intersectCardinality++;
+//                unionCardinality++;
+//            }
+//            else if (termDocMatrix[t][file1Index] >= 1 || termDocMatrix[t][file2Index] >= 1) {
+//                unionCardinality++;
+//            }
+
+            termD1 = termDocMatrix[t][file1Index];
+            termD2 = termDocMatrix[t][file2Index];
+            intersectCardinality += Math.min(termD1, termD2);
+            unionCardinality += Math.max(termD1, termD2);
         }
         return intersectCardinality/unionCardinality;
     }
