@@ -3,6 +3,7 @@ I already implemented the quicker version of getting the min for minHashMatrix
 - implement and experiment with other way of computing minHashMatrix that professor suggested
     i.e. compute hash of all terms before doing so for docs, then pull hashes from one compute prior
     and try implementing Eric's idea (in his photos)
-- get clarification on SimilarDocuments and when to use MultiSetJaccardSimilarity (haven't used method)
+- get clarification on SimilarDocuments and when to use MultiSetJaccardSimilarity (haven't used method),
+and MinHashAccuracy takes a while to run
 - check again and see if runtime if acceptable for larger test cases
 - do report
