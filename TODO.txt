@@ -9,6 +9,6 @@ and MinHashAccuracy takes a while to run
 - do report
 
 After Office Hours TODO:
-    - use the multiset jaccard similarity idea when finding jaccard similarities (i believe just in exact)
+    - use the multiset jaccard similarity idea (dont need the class/method) when finding jaccard similarities (i believe just in exact)
     - calculate the number of optimal bands based on s in the similar documents
     - double check that LSH is working as intended
