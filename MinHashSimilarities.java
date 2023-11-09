@@ -1,8 +1,5 @@
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class MinHashSimilarities {
 
@@ -42,14 +39,15 @@ public class MinHashSimilarities {
         double intersectCardinality = 0;
         double unionCardinality = minHash.numPermutations;
 
-        int file1Index = Arrays.asList(minHash.allDocs).indexOf(file1);
-        int file2Index = Arrays.asList(minHash.allDocs).indexOf(file2);
+        int[] sigOne = minHashSig(file1);
+        int[] sigTwo = minHashSig(file2);
 
-        for (int[] hashMatrix : minHashMatrix) {
-            if (hashMatrix[file1Index] == hashMatrix[file2Index]) {
+        for (int i = 0; i < sigOne.length; i++) {
+            if (sigOne[i] == sigTwo[i]) {
                 intersectCardinality++;
             }
         }
+
         return intersectCardinality/unionCardinality;
     }
 

@@ -27,15 +27,15 @@ public class Main {
 //        System.out.println();
 //
 //
-        MinHash min = new MinHash(folder, 800);
+        MinHash min = new MinHash(folder, 20);
         int[][] minHashMatrix = min.minHashMatrix();
-        String[] allDocs = min.allDocs();
-        for(int i = 0; i < minHashMatrix.length; i ++ ) {
-            for(int j = 0; j < minHashMatrix[i].length; j ++ ) {
-                System.out.print(minHashMatrix[i][j] + " ");
-            }
-            System.out.println();
-        }
+//        String[] allDocs = min.allDocs();
+//        for(int i = 0; i < minHashMatrix.length; i ++ ) {
+//            for(int j = 0; j < minHashMatrix[i].length; j ++ ) {
+//                System.out.print(minHashMatrix[i][j] + " ");
+//            }
+//            System.out.println();
+//        }
 //        int[][] termMatrix = min.termDocumentMatrix();
 //        for(int i = 0; i < termMatrix.length; i ++ ) {
 //            for(int j = 0; j < termMatrix[i].length; j ++ ) {
@@ -44,10 +44,10 @@ public class Main {
 //            System.out.println();
 //        }
 
-//        MinHashSimilarities minHashSimilarities = new MinHashSimilarities("C:\\Users\\hedgr_v6euno5\\OneDrive\\ISU Fall23\\COM S 435\\PA2\\space", 10);
+//        MinHashSimilarities minHashSimilarities = new MinHashSimilarities(folder, 20);
 //        System.out.println(minHashSimilarities.approximateJaccard("space-4.txt", "space-3.txt"));
 //        System.out.println(Arrays.toString(minHashSimilarities.minHashSig("space-10.txt")));
-//    System.out.println(MinHashAccuracy.accuracy(folder, 10, .5));
+    System.out.println(MinHashAccuracy.accuracy(folder, 400, .04));
 
 //        LSH lsh = new LSH(minHashMatrix, min.allDocs, 5);
 //        System.out.println(lsh.retrieveSim("space-10.txt"));
