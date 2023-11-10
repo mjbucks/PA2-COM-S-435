@@ -62,13 +62,13 @@ public class MinHash {
         Random rand;
         int[][] minhash = new int[numPermutations][allDocsSize];
         int a, b, p, x;
-        p = findPrimeLargerThanM(allDocsSize);
+        p = findPrimeLargerThanM(allTermsInDocset.size());
         ArrayList<String> currTerms;
 
         for (int pi = 0; pi < numPermutations; pi++) {
             rand = new Random(pi);
-            a = rand.nextInt();
-            b = rand.nextInt();
+            a = Math.abs(rand.nextInt());
+            b = Math.abs(rand.nextInt());
             int min, hashTerm;
 
             for (int d = 0; d < allDocsSize; d++) {
@@ -81,7 +81,7 @@ public class MinHash {
                 for (String currTerm : currTerms) {
                     x = currTerm.hashCode();
 
-                    hashTerm = Math.abs((a * x + b) % p);
+                    hashTerm = (a * x + b) % p;
                     if (hashTerm < min) {
                         min = hashTerm;
                     }

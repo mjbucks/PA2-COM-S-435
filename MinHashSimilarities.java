@@ -50,7 +50,7 @@ public class MinHashSimilarities {
         int[] sigOne = minHashSig(file1);
         int[] sigTwo = minHashSig(file2);
 
-        for (int i = 0; i < sigOne.length; i++) {
+        for (int i = 0; i < minHash.numPermutations; i++) {
             if (sigOne[i] == sigTwo[i]) {
                 intersectCardinality++;
             }
