@@ -4,14 +4,18 @@ import java.util.ArrayList;
 
 // TODO ask for clarification on this class
 public class SimilarDocuments {
-    double s;
     MinHash minHash;
     LSH lsh;
     //TODO ask if we should add bands as a param as LSH need int bands
-    public SimilarDocuments(String folder, int numPermutations, int bands, double s) throws FileNotFoundException {
+    public SimilarDocuments(String folder, int numPermutations, double s) throws FileNotFoundException {
         this.minHash = new MinHash(folder, numPermutations);
-        this.lsh = new LSH(minHash.minHashMatrix(), minHash.allDocs, bands);
-        this.s = s;
+        int b;
+        for (b = 1; b < numPermutations; b++) {
+            if (numPermutations % b == 0 && s == Math.pow(((double) 1 /b), ((double) b /numPermutations))) {
+                break;
+            }
+        }
+        this.lsh = new LSH(minHash.minHashMatrix(), minHash.allDocs, b);
     }
 
     /*
@@ -21,14 +25,6 @@ public class SimilarDocuments {
      */
 
     public ArrayList<String> similaritySearch (String docName) throws FileNotFoundException {
-        ArrayList<String> sSimDocs = lsh.retrieveSim(docName);
-
-
-
-//        for (String doc : sSimDocs) {
-//            if (JaccardSimilarity.MultiSetJaccardSimilarity())
-//        }
-
-        return sSimDocs;
+        return lsh.retrieveSim(docName);
     }
 }

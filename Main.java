@@ -48,15 +48,30 @@ public class Main {
 //        System.out.println(minHashSimilarities.exactJaccard("space-1.txt", "space-2.txt"));
 //        System.out.println(minHashSimilarities.approximateJaccard("space-1.txt", "space-2.txt"));
 //        System.out.println(Arrays.toString(minHashSimilarities.minHashSig("space-44.txt")));
-        int numPermutations = 800;
-        double errorParam = 0.06;
-    System.out.println("Number of Permutations = " + numPermutations + ", Error Parameter = " + errorParam + ": " + MinHashAccuracy.accuracy(folder, numPermutations, errorParam));
+//        int numPermutations = 400;
+//        double errorParam = 0.04;
+//    System.out.println("Number of Permutations = " + numPermutations + ", Error Parameter = " + errorParam + ": " + MinHashAccuracy.accuracy(folder, numPermutations, errorParam));
 //    }
 
 
 
 //        LSH lsh = new LSH(minHashMatrix, min.allDocs, 5);
 //        System.out.println(lsh.retrieveSim("space-10.txt"));
+
+        double s = 0.8;
+        int k = 20;
+        boolean good;
+//        MinHashSimilarities minHashSimilarities = new MinHashSimilarities(folder, k);
+        SimilarDocuments similarDocuments = new SimilarDocuments(folder, k, s);
+        ArrayList<String> simDocs = similarDocuments.similaritySearch("space-4.txt");
+        System.out.println(simDocs);
+
+//        for (int i = 0; i < simDocs.size(); i++) {
+//            for (int j = i + 1; j < simDocs.size(); j++) {
+//                good = minHashSimilarities.exactJaccard(simDocs.get(i), simDocs.get(j)) >= s;
+//                System.out.println("Similarity b/t " + simDocs.get(i) + ", " + simDocs.get(j) + " " + good);
+//            }
+//        }
 
     }//        System.out.println(JaccardSimilarity.MultiSetJaccardSimilarity());
 }
