@@ -49,8 +49,8 @@ public class Main {
 //        System.out.println(minHashSimilarities.approximateJaccard("space-1.txt", "space-2.txt"));
 //        System.out.println(Arrays.toString(minHashSimilarities.minHashSig("space-44.txt")));
         int numPermutations = 800;
-        double errorParam = 0.04;
-    System.out.println("MinHashAccuracy (Number of Permutations: " + numPermutations + ", Error Parameter: " + errorParam + "): " + MinHashAccuracy.accuracy(folder, numPermutations, errorParam));
+        double errorParam = 0.06;
+    System.out.println("Number of Permutations = " + numPermutations + ", Error Parameter = " + errorParam + ": " + MinHashAccuracy.accuracy(folder, numPermutations, errorParam));
 //    }
 
 
