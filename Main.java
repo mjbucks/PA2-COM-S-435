@@ -10,8 +10,8 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
-         String folder = "C:\\Users\\hedgr_v6euno5\\OneDrive\\ISU Fall23\\COM S 435\\PA2\\space";
-//        String folder = "C:\\Users\\Maxwe\\Downloads\\space\\space";
+         // String folder = "C:\\Users\\hedgr_v6euno5\\OneDrive\\ISU Fall23\\COM S 435\\PA2\\space";
+        String folder = "C:\\Users\\Maxwe\\Downloads\\space\\space";
 
 //        DocumentPreprocessor documentPreprocessor = new DocumentPreprocessor(new File("C:\\Users\\Maxwe\\Downloads\\articles\\articles\\baseball264.txt"));
 //        DocumentPreprocessor documentPreprocessor = new DocumentPreprocessor(folder, "space-4.txt");
@@ -58,20 +58,26 @@ public class Main {
 //        LSH lsh = new LSH(minHashMatrix, min.allDocs, 5);
 //        System.out.println(lsh.retrieveSim("space-10.txt"));
 
-        double s = 0.8;
-        int k = 20;
+        double s = 0.08;
+        int k = 400;
         boolean good;
-//        MinHashSimilarities minHashSimilarities = new MinHashSimilarities(folder, k);
+        MinHashSimilarities minHashSimilarities = new MinHashSimilarities(folder, k);
         SimilarDocuments similarDocuments = new SimilarDocuments(folder, k, s);
-        ArrayList<String> simDocs = similarDocuments.similaritySearch("space-4.txt");
-        System.out.println(simDocs);
+        ArrayList<String> simDocs = similarDocuments.similaritySearch("space-44.txt");
+//        System.out.println(simDocs);
 
-//        for (int i = 0; i < simDocs.size(); i++) {
-//            for (int j = i + 1; j < simDocs.size(); j++) {
-//                good = minHashSimilarities.exactJaccard(simDocs.get(i), simDocs.get(j)) >= s;
-//                System.out.println("Similarity b/t " + simDocs.get(i) + ", " + simDocs.get(j) + " " + good);
+//        for(int i = 0; i < minHashSimilarities.minHash.allDocsSize; i++){
+//            if ( minHashSimilarities.exactJaccard("space-44.txt", minHashSimilarities.minHash.allDocs[i]) >= 0.08){
+//                System.out.println(minHashSimilarities.minHash.allDocs[i]);
 //            }
 //        }
+
+        for (int i = 0; i < simDocs.size(); i++) {
+            for (int j = i + 1; j < simDocs.size(); j++) {
+                good = minHashSimilarities.exactJaccard(simDocs.get(i), simDocs.get(j)) >= s;
+                System.out.println("Similarity b/t " + simDocs.get(i) + ", " + simDocs.get(j) + " " + good);
+            }
+        }
 
     }//        System.out.println(JaccardSimilarity.MultiSetJaccardSimilarity());
 }
