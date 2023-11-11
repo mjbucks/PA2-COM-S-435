@@ -23,6 +23,7 @@ public class MinHash {
 
     ArrayList<String> allTermsInDocset;
     int allDocsSize;
+    int permutationDomain;
 
     public MinHash(String folder, int numPermutations) throws FileNotFoundException {
         this.folder = folder;
@@ -30,9 +31,7 @@ public class MinHash {
         this.allDocs = allDocs();
         allDocsSize = allDocs.length;
         allTermsInDocset = getAllTerms();
-
-//        minHashMatrix = minHashMatrix();
-//        termDocumentMatrix = termDocumentMatrix();
+        this.permutationDomain = findPrimeLargerThanM(allTermsInDocset.size());
     }
 
     public String[] allDocs() {
@@ -62,7 +61,7 @@ public class MinHash {
         Random rand;
         int[][] minhash = new int[numPermutations][allDocsSize];
         int a, b, p, x;
-        p = findPrimeLargerThanM(allTermsInDocset.size());
+        p = permutationDomain;
         ArrayList<String> currTerms;
 
         for (int pi = 0; pi < numPermutations; pi++) {
@@ -137,7 +136,7 @@ public class MinHash {
     }
 
     public int permutationDomain() {
-        return allTermsInDocset.size();
+        return permutationDomain;
     }
 
     public ArrayList<String> getAllTerms() throws FileNotFoundException {
