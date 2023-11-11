@@ -10,17 +10,9 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class MinHash {
-
     String folder;
-
     int numPermutations;
-
     String[] allDocs;
-
-    int[][] minHashMatrix;
-
-    int[][] termDocumentMatrix;
-
     ArrayList<String> allTermsInDocset;
     int allDocsSize;
     int permutationDomain;
@@ -91,7 +83,6 @@ public class MinHash {
         return minhash;
     }
 
-    // TODO Professor mentioned counting how many times a term appears rather than doing 0 or 1 if appears
     public int[][] termDocumentMatrix() throws FileNotFoundException {
         DocumentPreprocessor documentPreprocessor;
         int[][] termDocMatrix = new int[allTermsInDocset.size()][allDocsSize];
@@ -111,6 +102,7 @@ public class MinHash {
         for (int i = 2; i <= n / 2; ++i) {
             if (n % i == 0) {
                 flag = false;
+                break;
             }
         }
         return flag;

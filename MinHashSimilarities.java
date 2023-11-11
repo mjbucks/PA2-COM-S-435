@@ -6,7 +6,6 @@ public class MinHashSimilarities {
     MinHash minHash;
     int[][] minHashMatrix;
     int[][] termDocMatrix;
-    DocumentPreprocessor documentPreprocessor;
     String folder;
     public MinHashSimilarities(String folder, int numPermutations) throws FileNotFoundException {
         this.folder = folder;
