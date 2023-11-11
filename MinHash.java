@@ -32,9 +32,6 @@ public class MinHash {
         allDocsSize = allDocs.length;
         allTermsInDocset = getAllTerms();
         this.permutationDomain = findPrimeLargerThanM(allTermsInDocset.size());
-
-//        minHashMatrix = minHashMatrix();
-//        termDocumentMatrix = termDocumentMatrix();
     }
 
     public String[] allDocs() {
