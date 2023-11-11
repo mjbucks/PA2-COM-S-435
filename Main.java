@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
-         String folder = "C:\\Users\\hedgr_v6euno5\\OneDrive\\ISU Fall23\\COM S 435\\PA2\\space";
+         String folder = "C:\\Users\\hedgr_v6euno5\\OneDrive\\ISU Fall23\\COM S 435\\PA2\\doc subset";
 //        String folder = "C:\\Users\\Maxwe\\Downloads\\space\\space";
 
 //        DocumentPreprocessor documentPreprocessor = new DocumentPreprocessor(new File("C:\\Users\\Maxwe\\Downloads\\articles\\articles\\baseball264.txt"));
@@ -59,11 +59,11 @@ public class Main {
 //        System.out.println(lsh.retrieveSim("space-10.txt"));
 
         double s = 0.8;
-        int k = 20;
+        int k = 100;
         boolean good;
 //        MinHashSimilarities minHashSimilarities = new MinHashSimilarities(folder, k);
         SimilarDocuments similarDocuments = new SimilarDocuments(folder, k, s);
-        ArrayList<String> simDocs = similarDocuments.similaritySearch("space-4.txt");
+        ArrayList<String> simDocs = similarDocuments.similaritySearch("baseball0.txt");
         System.out.println(simDocs);
 
 //        for (int i = 0; i < simDocs.size(); i++) {

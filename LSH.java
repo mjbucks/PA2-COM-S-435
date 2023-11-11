@@ -1,15 +1,11 @@
 import java.util.*;
 
 public class LSH {
-    private int[][] minHashMatrix;
     private String[] docNames;
-    private int bands;
     private HashMap<Integer, List<String>>[] hashTables;
 
     public LSH(int[][] minHashMatrix, String[] docNames, int bands) {
-        this.minHashMatrix = minHashMatrix;
         this.docNames = docNames;
-        this.bands = bands;
         this.hashTables = new HashMap[bands];
 
         for (int i = 0; i < bands; i++) {

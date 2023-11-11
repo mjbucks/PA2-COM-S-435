@@ -15,6 +15,7 @@ public class SimilarDocuments {
                 break;
             }
         }
+        b = 10;
         this.lsh = new LSH(minHash.minHashMatrix(), minHash.allDocs, b);
     }
 
