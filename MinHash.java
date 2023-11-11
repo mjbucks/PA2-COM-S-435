@@ -144,12 +144,11 @@ public class MinHash {
         ArrayList<String> termsList = new ArrayList<String>();
         DocumentPreprocessor documentPreprocessor;
         for(int i = 0; i < allDocsSize; i++){
-            //File currFile = new File(folder + "\\" + allDocs[i]);
             documentPreprocessor = new DocumentPreprocessor(folder, allDocs[i]);
             ArrayList<String> currTerms = documentPreprocessor.preProcess();
-            for(int j = 0; j < currTerms.size(); j++){
-                if (!termsList.contains(currTerms.get(j))){
-                    termsList.add(currTerms.get(j));
+            for (String currTerm : currTerms) {
+                if (!termsList.contains(currTerm)) {
+                    termsList.add(currTerm);
                 }
             }
         }
