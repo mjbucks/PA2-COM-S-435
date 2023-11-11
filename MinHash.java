@@ -75,7 +75,7 @@ public class MinHash {
                 documentPreprocessor = new DocumentPreprocessor(folder, allDocs[d]);
                 currTerms = documentPreprocessor.preProcess();
 
-                min = 2147483647; // max value of int
+                min = Integer.MAX_VALUE; // max value of int
 
                 for (String currTerm : currTerms) {
                     x = currTerm.hashCode();

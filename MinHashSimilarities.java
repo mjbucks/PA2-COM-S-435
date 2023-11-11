@@ -27,14 +27,6 @@ public class MinHashSimilarities {
 
 
         for (int t = 0; t < termDocMatrix.length; t++) {
-//            if (termDocMatrix[t][file1Index] >= 1 && termDocMatrix[t][file2Index] >= 1) {
-//                intersectCardinality++;
-//                unionCardinality++;
-//            }
-//            else if (termDocMatrix[t][file1Index] >= 1 || termDocMatrix[t][file2Index] >= 1) {
-//                unionCardinality++;
-//            }
-
             termD1 = termDocMatrix[t][file1Index];
             termD2 = termDocMatrix[t][file2Index];
             intersectCardinality += Math.min(termD1, termD2);
