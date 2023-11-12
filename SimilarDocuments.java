@@ -17,7 +17,6 @@ public class SimilarDocuments {
                 for (backwards = b; backwards > 0; backwards--){
                     if(numPermutations % backwards == 0){
                         bands = backwards;
-                        System.out.println(bands);
                         break;
                     }
                 }
