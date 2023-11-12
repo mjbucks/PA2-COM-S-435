@@ -72,7 +72,7 @@ public class MinHash {
                 for (String currTerm : currTerms) {
                     x = currTerm.hashCode();
 
-                    hashTerm = (a * x + b) % p;
+                    hashTerm = Math.abs((a * x + b) % p);
                     if (hashTerm < min) {
                         min = hashTerm;
                     }

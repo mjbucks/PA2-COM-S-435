@@ -22,7 +22,7 @@ public class DocumentPreprocessor {
                 String word = scan.next();
                 word = word.toLowerCase();
                 word = word.replaceAll("[.,:;'']", "");
-                if (word != "are" && word != "the" && word.length() > 2){
+                if (!word.equals("are") && !word.equals("the") && word.length() > 2){
                     document.add(word);
                 }
         }
