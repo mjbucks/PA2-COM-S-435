@@ -58,7 +58,7 @@ public class Main {
 //        LSH lsh = new LSH(minHashMatrix, min.allDocs, 5);
 //        System.out.println(lsh.retrieveSim("space-10.txt"));
 
-        double s = 0.8;
+        double s = 0.95;
         int k = 400;
         boolean good;
 //        MinHashSimilarities minHashSimilarities = new MinHashSimilarities(folder, k);
