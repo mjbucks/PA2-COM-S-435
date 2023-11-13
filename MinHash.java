@@ -16,6 +16,7 @@ public class MinHash {
     ArrayList<String> allTermsInDocset;
     int allDocsSize;
     int permutationDomain;
+    ArrayList<ArrayList<String>> docs;
 
     public MinHash(String folder, int numPermutations) throws FileNotFoundException {
         this.folder = folder;
@@ -24,6 +25,13 @@ public class MinHash {
         allDocsSize = allDocs.length;
         allTermsInDocset = getAllTerms();
         this.permutationDomain = findPrimeLargerThanM(allTermsInDocset.size());
+        this.docs = new ArrayList<ArrayList<String>>();
+
+        DocumentPreprocessor documentPreprocessor;
+        for (int doc = 0; doc < allDocsSize; doc++) {
+            documentPreprocessor = new DocumentPreprocessor(folder, allDocs[doc]);
+            docs.add(documentPreprocessor.preProcess());
+        }
     }
 
     public String[] allDocs() {
@@ -49,7 +57,6 @@ public class MinHash {
 
     public int[][] minHashMatrix() throws FileNotFoundException {
 
-        DocumentPreprocessor documentPreprocessor;
         Random rand;
         int[][] minhash = new int[numPermutations][allDocsSize];
         int a, b, p, x;
@@ -63,9 +70,7 @@ public class MinHash {
             int min, hashTerm;
 
             for (int d = 0; d < allDocsSize; d++) {
-
-                documentPreprocessor = new DocumentPreprocessor(folder, allDocs[d]);
-                currTerms = documentPreprocessor.preProcess();
+                currTerms = docs.get(d);
 
                 min = Integer.MAX_VALUE; // max value of int
 
