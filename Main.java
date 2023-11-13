@@ -27,15 +27,15 @@ public class Main {
 //        System.out.println();
 //
 //
-        MinHash min = new MinHash(folder, 400);
-        int[][] minHashMatrix = min.minHashMatrix();
-        String[] allDocs = min.allDocs();
-        for(int i = 0; i < minHashMatrix.length; i ++ ) {
-            for(int j = 0; j < minHashMatrix[i].length; j ++ ) {
-                System.out.print(minHashMatrix[i][j] + " ");
-            }
-            System.out.println();
-        }
+//        MinHash min = new MinHash(folder, 400);
+//        int[][] minHashMatrix = min.minHashMatrix();
+//        String[] allDocs = min.allDocs();
+//        for(int i = 0; i < minHashMatrix.length; i ++ ) {
+//            for(int j = 0; j < minHashMatrix[i].length; j ++ ) {
+//                System.out.print(minHashMatrix[i][j] + " ");
+//            }
+//            System.out.println();
+//        }
 //        int[][] termMatrix = min.termDocumentMatrix();
 //        for(int i = 0; i < termMatrix.length; i ++ ) {
 //            for(int j = 0; j < termMatrix[i].length; j ++ ) {
@@ -48,9 +48,18 @@ public class Main {
 //        System.out.println(minHashSimilarities.exactJaccard("space-1.txt", "space-2.txt"));
 //        System.out.println(minHashSimilarities.approximateJaccard("space-1.txt", "space-2.txt"));
 //        System.out.println(Arrays.toString(minHashSimilarities.minHashSig("space-44.txt")));
-//        int numPermutations = 400;
-//        double errorParam = 0.04;
-//    System.out.println("Number of Permutations = " + numPermutations + ", Error Parameter = " + errorParam + ": " + MinHashAccuracy.accuracy(folder, numPermutations, errorParam));
+        double[] errorParams = {0.04, 0.07, 0.09};
+        int[] k = {400, 600, 800};
+        double errorParam;
+        int numPermutations;
+
+        for (double param : errorParams) {
+            for (int i : k) {
+                errorParam = param;
+                numPermutations = i;
+                System.out.println("Number of Permutations = " + numPermutations + ", Error Parameter = " + errorParam + ": " + MinHashAccuracy.accuracy(folder, numPermutations, errorParam));
+            }
+        }
 //    }
 
 //        MinHash minHash = new MinHash(folder, 400);
@@ -60,7 +69,7 @@ public class Main {
 //        }
 
 
-        //System.out.println(MinHashAccuracy.accuracy(folder, 400, 0.09));
+//        System.out.println(MinHashAccuracy.accuracy(folder, 400, 0.04));
 
 //        LSH lsh = new LSH(minHashMatrix, min.allDocs, 5);
 //        System.out.println(lsh.retrieveSim("space-10.txt"));
